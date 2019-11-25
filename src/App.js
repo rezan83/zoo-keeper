@@ -1,11 +1,11 @@
 import React from 'react'
-import {Animal} from './components'
+import {AnimalList} from './components'
 
 const App = () => {
     return (
         <div>
             <h1>Animal List</h1>
-            <Animal />
+            <AnimalList />
         </div>
     )
 }

@@ -1,31 +1,22 @@
 import React from 'react'
 import {Animal} from './../'
 import './AnimalList.scss'
-import {observer} from 'mobx-react'
-// import movies from './../../Store'
 
-const AnimalList = observer(() => {
-    
-    const clickHandel = (animal) => {
-        animal.favorit = !animal.favorit;
-        animals.initialanimals.splice(animals.initialanimals.indexOf(animal), 1, animal);
-    }
-    
-    const animalList = animals.initialanimals.map(animal => {
-        return (
-            <Animal 
-                animal={animal} 
-                key={animal.id}
-                clickHandel={() => clickHandel(animal)}
-            />
-        )
-    })
+const AnimalList = () => {
 
     return(
-        <div className='animal-list' >
-            {animalList}
+        <div className="anim-list">
+            <div className="bar main-bar">
+                <h4>Animal</h4>
+                <h4>Name</h4>
+                <h4>Last Check</h4>
+                <h4>Treatment</h4>
+            </div>
+
+            <Animal />
+
         </div>
     )
-})
+}
 
 export default AnimalList

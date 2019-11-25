@@ -10,8 +10,8 @@ import './bull.png'
 import './syringRed.png'
 import './syringBlue.png'
 
-// animal types to load animal icon dynamically
-var types = {
+// animal icons to load animal icon dynamically
+let icons = {
     penguin: './penguin.png',
     horse: './horse.png',
     monkey: './monkey.png',
@@ -20,30 +20,30 @@ var types = {
 }
 
 
-var initialAnimals = JSON.stringify([
-    {type: 'penguin', name: 'Flyer', medCheck: (new Date()), id: 1},
-    {type: 'penguin', name: 'Maistro', medCheck: (new Date('2019-11-21')), id: 2},
-    {type: 'horse', name: 'Lazy', medCheck: (new Date('2019-10-24')), id: 3},
-    {type: 'monkey', name: 'Polite', medCheck: (new Date('2019-10-18')), id: 4},
-    {type: 'bull', name: 'Calm', medCheck: (new Date('2019-09-21')), id: 5},
-    {type: 'rabbit', name: 'Modest', medCheck: (new Date('2019-11-20')), id: 6},
+let initialAnimals = JSON.stringify([
+    {icon: 'penguin', name: 'Flyer', medCheck: (new Date()), id: 1},
+    {icon: 'penguin', name: 'Maistro', medCheck: (new Date('2019-11-21')), id: 2},
+    {icon: 'horse', name: 'Lazy', medCheck: (new Date('2019-10-24')), id: 3},
+    {icon: 'monkey', name: 'Polite', medCheck: (new Date('2019-10-18')), id: 4},
+    {icon: 'bull', name: 'Calm', medCheck: (new Date('2019-09-21')), id: 5},
+    {icon: 'rabbit', name: 'Modest', medCheck: (new Date('2019-11-20')), id: 6},
 ]);
 
 // sorting by last med check
-var Animals = JSON.parse(initialAnimals).sort((a, b) => {
+let Animals = JSON.parse(initialAnimals).sort((a, b) => {
     return a.medCheck.substring(0,10) < b.medCheck.substring(0,10)? -1:1;
 })
 
 
 const Animal = () => {
 
-    var [animalState, setanimalState] = useState(Animals)
+    const [animalState, setanimalState] = useState(Animals)
 
     const treatment = (animal) =>{
         if(animal.medCheck.substring(0,8) < (new Date()).toISOString().substring(0,8)){
-            var newAnimal = animal ;
+            const newAnimal = animal ;
             newAnimal.medCheck = (new Date()).toISOString()
-            var Animals = [...animalState];
+            const Animals = [...animalState];
             Animals.splice(animalState.indexOf(animal), 1, newAnimal);
             Animals.sort((a, b) => {
                 return a.medCheck.substring(0,10) < b.medCheck.substring(0,10)? -1:1;
@@ -53,15 +53,16 @@ const Animal = () => {
         } 
     }
 
-    var animals = animalState.map(animal => {
-        // change syring icon to red when not medicaly checked for more than 1 month
+    const animals = animalState.map((animal, index) => {
+
+        // change syring icon to red when not medicaly checked this month
         var syring = 
             animal.medCheck.substring(0,8) < (new Date()).toISOString().substring(0,8)?
             './syringRed.png' : './syringBlue.png';
 
         return(
-            <div className="bar" key={animal.id}>
-                <img src={require(`${types[animal.type]}`)} alt="Avatar"  />
+            <div className={"bar " + (index%2? "even": "odd")} key={animal.id} >
+                <img src={require(`${icons[animal.icon]}`)} alt="Avatar"  />
                 <h4 className="name">{animal.name}</h4>
                 <h4 className="med">{ animal.medCheck.substring(0, 10) }</h4>
                 <img className="med-check" 
@@ -74,16 +75,8 @@ const Animal = () => {
     })
 
     return(
-        <div className="anim-list">
-            <div className="bar main-bar">
-                <h4>Animal</h4>
-                <h4>Name</h4>
-                <h4>Last Check</h4>
-                <h4>Treatment</h4>
-            </div>
-
+        <div className="animals">
             {animals}
-
         </div>
     )
 
