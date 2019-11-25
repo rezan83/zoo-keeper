@@ -19,7 +19,7 @@ let icons = {
     bull: './bull.png',
 }
 
-
+// initial json object
 let initialAnimals = JSON.stringify([
     {icon: 'penguin', name: 'Flyer', medCheck: (new Date()), id: 1},
     {icon: 'penguin', name: 'Maistro', medCheck: (new Date('2019-11-21')), id: 2},
@@ -39,6 +39,7 @@ const Animal = () => {
 
     const [animalState, setanimalState] = useState(Animals)
 
+    // update medical check only if not updated in current month
     const treatment = (animal) =>{
         if(animal.medCheck.substring(0,8) < (new Date()).toISOString().substring(0,8)){
             const newAnimal = animal ;
@@ -53,6 +54,7 @@ const Animal = () => {
         } 
     }
 
+    // mapping animal list
     const animals = animalState.map((animal, index) => {
 
         // change syring icon to red when not medicaly checked this month
