@@ -7,10 +7,14 @@ Notice: I have used a template I made previously that have Mobx, mobx-react and 
 
 # Techniques used and caveats:
 For the sake of simplicity I only implemented what i was asked for explicitly. But further features could be added in future, for example:
+
 -The only 'CRUD' ability right now is to update medical check. But Additional CRUD could be implemented if asked for. For example adding new Animals.
+
 -I could make a class to generate animals. but for now they are only predefined in jason object.
+
 -The JSON object isn't stored/retrieved using 'localStorage'.
--I didn't pass any props and didn't use any state managment lib, I usually use Mobx.
+
+-I didn't pass any state as props down components and didn't use any state managment lib, I usually use Mobx.
 
 # Install and run
 with yarn "recomended":
